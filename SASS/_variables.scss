@@ -1,0 +1,8 @@
+$main-font-size: clamp(1rem, 1vw, 1.125rem);
+
+$icon-size: 50px;
+$icon-border: 2px;
+$spacing: 2rem;
+
+$chart-height: 25vh;
+$chart-element-max-height: calc($chart-height - ($main-font-size * 2) - $spacing);

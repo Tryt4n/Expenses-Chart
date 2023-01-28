@@ -1,0 +1,228 @@
+@use "./colors" as c;
+@use "./variables" as v;
+@use "./mixins" as *;
+
+body {
+  width: 100%;
+  height: 100vh;
+  @include flex(row, center, center);
+  background: c.$cream;
+  @media (height < 600px) {
+    align-items: stretch;
+  }
+}
+
+.expenses-chart {
+  width: 30vw;
+  min-width: 500px;
+  margin: 1.5rem;
+
+  @media (width <= 768px) {
+    padding: 0.5rem;
+    margin: 0;
+    width: 100vw;
+    min-width: 320px;
+  }
+}
+
+.balance {
+  background-color: c.$soft-red;
+  padding: v.$spacing;
+  margin: 1.5rem 0;
+  border-radius: 1rem;
+  color: c.$very-pale-orange;
+  @include flex(row, space-between, center);
+
+  &__wrap {
+    @include flex(column);
+    gap: 0.75rem;
+
+    &--header {
+      font-size: inherit;
+      font-weight: normal;
+    }
+
+    &--current {
+      font-size: 1.75rem;
+      font-weight: bold;
+    }
+  }
+
+  &__icon {
+    position: relative;
+    display: block;
+    width: v.$icon-size;
+    height: v.$icon-size;
+    border-radius: 50%;
+    background-color: c.$dark-brown;
+    &::before {
+      content: "";
+      position: absolute;
+      width: calc(v.$icon-size - (v.$icon-border / 2));
+      height: calc(v.$icon-size - (v.$icon-border / 2));
+      background-color: transparent;
+      border: v.$icon-border solid c.$very-pale-orange;
+      border-radius: 50%;
+      translate: -50%;
+    }
+  }
+}
+
+.spending {
+  padding: v.$spacing;
+  border-radius: 1rem;
+  background: c.$very-pale-orange;
+  @media (width < 450px) {
+    padding: 0.5rem;
+  }
+
+  &--header {
+    color: c.$dark-brown;
+  }
+
+  .chart {
+    height: v.$chart-height;
+    @include flex(row, space-between, flex-end);
+    gap: 1rem;
+    padding-bottom: v.$spacing;
+    margin-top: 5rem;
+    border-bottom: 1px solid c.$cream;
+
+    &--day {
+      position: relative;
+      width: calc(100% / 7);
+      text-align: center;
+      outline: none;
+      cursor: pointer;
+
+      &::before,
+      &::after {
+        position: absolute;
+        left: 0;
+        bottom: 0;
+        border-radius: 0.25rem;
+        transition: 300ms ease-in-out;
+      }
+
+      &::before {
+        content: "";
+        width: 100%;
+        background: c.$soft-red;
+        translate: 0 calc((v.$main-font-size * 2) * -1);
+      }
+      &:hover:before,
+      &:focus::before {
+        background: c.$soft-red-hover;
+      }
+
+      &::after {
+        opacity: 0;
+        padding: 0.5rem;
+        color: c.$very-pale-orange;
+        background: c.$dark-brown;
+        cursor: auto;
+        @include flex(row, center, center);
+        translate: -0.5rem calc((v.$chart-element-max-height * -1) - 3rem);
+      }
+      &:hover::after,
+      &:focus:after {
+        opacity: 1;
+      }
+    }
+
+    &__mon::before {
+      height: var(--height);
+    }
+    &__mon::after {
+      @include chartExpenseText(var(--height));
+      content: attr(data-chart-mon);
+    }
+
+    &__tue::before {
+      height: var(--height);
+    }
+    &__tue::after {
+      @include chartExpenseText(var(--height));
+      content: attr(data-chart-tue);
+    }
+
+    &__wed::before {
+      height: var(--height);
+    }
+    &__wed::after {
+      @include chartExpenseText(var(--height));
+      content: attr(data-chart-wed);
+    }
+
+    &__thu::before {
+      height: var(--height);
+    }
+    &__thu::after {
+      @include chartExpenseText(var(--height));
+      content: attr(data-chart-thu);
+    }
+
+    &__fri::before {
+      height: var(--height);
+    }
+    &__fri::after {
+      @include chartExpenseText(var(--height));
+      content: attr(data-chart-fri);
+    }
+
+    &__sat::before {
+      height: var(--height);
+    }
+    &__sat::after {
+      @include chartExpenseText(var(--height));
+      content: attr(data-chart-sat);
+    }
+
+    &__sun::before {
+      height: var(--height);
+    }
+    &__sun::after {
+      @include chartExpenseText(var(--height));
+      content: attr(data-chart-sun);
+    }
+
+    &--highest-amount::before {
+      background: c.$cyan;
+    }
+
+    &--highest-amount:hover::before,
+    &--highest-amount:focus::before {
+      background: c.$cyan-hover;
+    }
+  }
+}
+
+.total {
+  @include flex(row, space-between);
+  margin: v.$spacing 0;
+
+  &__integer {
+    @include flex(column);
+  }
+
+  &__percent {
+    @include flex(column, flex-end);
+  }
+
+  &--header {
+    font-size: inherit;
+    font-weight: normal;
+  }
+
+  &--spent {
+    font-size: 2.5rem;
+    font-weight: bold;
+    color: c.$dark-brown;
+  }
+
+  &--percent-value {
+    text-align: end;
+    font-weight: bold;
+    color: c.$dark-brown;
+  }
+}

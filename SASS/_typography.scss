@@ -1,0 +1,10 @@
+@use "./colors" as c;
+@use "./variables" as v;
+
+@import url("https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;700&display=swap");
+
+body {
+  font-family: "DM Sans", sans-serif;
+  font-size: v.$main-font-size;
+  color: c.$medium-brown;
+}
