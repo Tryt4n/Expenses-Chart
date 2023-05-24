@@ -1,5 +1,7 @@
 # Frontend Mentor - Expenses chart component
 
+[Link to the page](https://responsive-expenses-chart-wtih-fetch.netlify.app/)
+
 ![Design preview for the Expenses chart component coding challenge](./design/desktop-preview.jpg)
 
 ## Welcome! 👋
